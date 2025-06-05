@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smart Cart Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --black: #000;
+            --white: #fff;
+            --gray-bg: #f0f0f0;
+            --gray-text: #555;
+            --accent: #333;
+            --card-bg: #fff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--gray-bg);
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--black);
+            padding: 20px 40px;
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+            nav .logo {
+                display: flex;
+                align-items: center;
+                font-weight: 700;
+                font-size: 1.5em;
+                cursor: default;
+            }
+
+                nav .logo img {
+                    height: 40px;
+                    margin-right: 10px;
+                }
+
+            nav .links a {
+                margin-left: 30px;
+                text-decoration: none;
+                color: var(--white);
+                font-weight: 600;
+                font-size: 1em;
+                transition: color 0.3s;
+            }
+
+                nav .links a:hover {
+                    text-decoration: underline;
+                    color: #bbb;
+                }
+
+        .tab-content {
+            display: none;
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .hero {
+            padding: 100px 40px 40px;
+            background: #e6e6e6;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            color: var(--black);
+            border-bottom: 3px solid var(--black);
+            padding-bottom: 8px;
+            max-width: fit-content;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: var(--gray-text);
+            text-align: justify;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 25px 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+
+            .card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+            }
+
+            .card img {
+                width: 100%;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                object-fit: cover;
+                max-height: 200px;
+            }
+
+            /* Specific fix for CAD tab images */
+            #cad .card img {
+                height: 200px;
+                object-fit: contain;
+            }
+
+            #components img[alt*="Leitor de códigos Zebra DS2208"],
+            #components img[alt*="Motores 24V"],
+            #components img[alt*="Sensor de força FlexiForce A201-25"] {
+                height: 200px;
+                object-fit: contain;
+            }
+
+
+
+            .card h3 {
+                margin: 0 0 10px 0;
+                color: var(--black);
+                font-weight: 700;
+                font-size: 1.3em;
+            }
+
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            line-height: 1.6;
+            user-select: none;
+        }
+
+            footer img {
+                height: 60px;
+                margin-top: 15px;
+                filter: brightness(0) invert(1);
+            }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+                nav .links {
+                    margin-top: 10px;
+                }
+
+                    nav .links a {
+                        margin-left: 0;
+                        margin-right: 20px;
+                        font-size: 0.95em;
+                    }
+
+            .tab-content {
+                padding: 40px 20px;
+            }
+
+            .hero {
+                padding: 60px 20px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="images/logo/logo1.png" alt="Logo Smart Cart Express" />
+            Smart Cart Express
+        </div>
+        <div class="links">
+            <a href="#" onclick="showTab('home')">Home</a>
+            <a href="#" onclick="showTab('cad')">CAD</a>
+            <a href="#" onclick="showTab('components')">Componentes</a>
+            <a href="#" onclick="showTab('materials')">Materiais</a>
+            <a href="#" onclick="showTab('team')">Equipa Técnica</a>
+        </div>
+    </nav>
+
+    <div id="home" class="tab-content active">
+        <section class="hero">
+            <h1>O Futuro da Experiência de ir às Compras!</h1>
+            <p>Uma inovação desenvolvida por estudantes da Universidade de Aveiro.</p>
+        </section>
+
+        <section>
+            <h2>Sobre Nós</h2>
+            <p>Somos a <strong>Smart Cart Express</strong>, uma equipa de quatro estudantes dedicada ao desenvolvimento de um carrinho de compras inteligente, funcional e inovador. O projeto é orientado pela Professora Gabriela Vincze e integra a disciplina <em>Projeto de Engenharia Mecânica (PEM)</em>, do 3º ano, 2º semestre, ano letivo 2025. Estamos empenhados em aplicar os conhecimentos adquiridos para criar uma solução prática e tecnológica que melhore a experiência de compras.</p>
+            <p><strong>Equipa:</strong> David Freitas, Bernardo Barros, Sérgio Limões e José Lopes</p>
+            <p><strong>Universidade:</strong> Universidade de Aveiro – Departamento de Engenharia Mecânica (DEM)</p>
+        </section>
+    </div>
+
+    <div id="cad" class="tab-content">
+        <h1>Modelos CAD</h1>
+        <p><strong>Responsável:</strong> David Freitas</p>
+        <div class="grid">
+            <div class="card">
+                <img src="images/cart/iso.jpeg" alt="Vista geral CAD" />
+                <p>Vista geral do carrinho com estrutura em Polipropileno.</p>
+            </div>
+            <div class="card">
+                <img src="images/cart/lateral.jpeg" alt="Vista Lateral" />
+                <p>Vista lateral do carrinho com rodas em Poliuretano.</p>
+            </div>
+            <div class="card">
+                <img src="images/cart/liga.jpeg" alt="Vista de Conjunto" />
+                <p>Vista do carrinho interligado com outros modelos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="components" class="tab-content">
+        <h1>Componentes</h1>
+        <p><strong>Responsáveis:</strong> Bernardo Barros (ecrã, leitor de códigos, sensor de carga, câmara, processador principal) e José Lopes (bateria, motores, drivers, sensor de força)</p>
+        <div class="grid">
+            <div class="card">
+                <img src="images/components/raspberry.jpg" alt="Raspberry Pi 4" />
+                <h3>Raspberry Pi 4</h3>
+                <p>Responsável pelo controlo central de todos os sistemas: sensores, motores e interfaces gráficas.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/camera.png" alt="Camera HQ v2" />
+                <h3>Camera HQ v2</h3>
+                <p>Captura imagens e vídeos do ambiente para análise visual e reconhecimento de produtos.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/ecran.png" alt="Ecrã ELO" />
+                <h3>Ecrã ELO 1004LS</h3>
+                <p>Interface do utilizador com ligação HDMI, exibe menus e feedback visual em tempo real.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/motor.jpg" alt="Motores 24V" />
+                <h3>2x Motores 24V</h3>
+                <p>Permitem a locomoção autónoma e controlada do carrinho, com potência suficiente para superfícies irregulares.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/driver.jpg" alt="Driver VNH2SP30" />
+                <h3>2x Drivers VNH2SP30</h3>
+                <p>Controladores que gerem a potência entregue aos motores com precisão e segurança.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/bateria.webp" alt="Bateria 24V 50Ah LiFePO4" />
+                <h3>Bateria Manly 24V 50Ah LiFePO4</h3>
+                <p>Fonte principal de energia para todos os componentes eletrónicos e motores do carrinho.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/scanner.webp" alt="Leitor de códigos Zebra DS2208" />
+                <h3>Leitor de Códigos de Barras Zebra DS2208</h3>
+                <p>Permite a leitura rápida e precisa dos códigos dos produtos durante as compras.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/carga.jpg" alt="Célula de carga Grobotronics 150kg" />
+                <h3>Célula de carga 150kg + HX711</h3>
+                <p>Mede o peso dos produtos para controlo e segurança da compra.</p>
+            </div>
+            <div class="card">
+                <img src="images/components/forca.webp" alt="Sensor de força FlexiForce A201-25" />
+                <h3>Sensor de Força FlexiForce A201-25</h3>
+                <p>Deteta pressão aplicada para melhorar a interação e segurança do sistema.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="materials" class="tab-content">
+        <h1>Materiais</h1>
+        <p><strong>Responsável:</strong> Sérgio Limões</p>
+        <div class="grid">
+            <div class="card">
+                <img src="images/materials/polipropileno.jpg" alt="Polipropileno (PP)" />
+                <h3>Polipropileno (PP)</h3>
+                <p style="text-align: justify;">
+                    Material principal da estrutura do carrinho. O Polipropileno é leve, resistente e tem boa resistência química, tornando-o ideal para o uso diário em ambientes comerciais.
+                </p>
+            </div>
+            <div class="card">
+                <img src="images/materials/poliuretano.jpg" alt="Poliuretano (PU)" />
+                <h3>Poliuretano (PU)</h3>
+                <p style="text-align: justify;">
+                    Material utilizado nas rodas. O Poliuretano oferece durabilidade, amortecimento e resistência ao desgaste, garantindo uma movimentação suave e eficiente do carrinho.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="team" class="tab-content">
+        <h1>Equipa Técnica</h1>
+        <p>Somos quatro estudantes da Universidade de Aveiro, Departamento de Engenharia Mecânica (DEM), que desenvolveram o projeto Smart Cart Express com dedicação e paixão pela inovação.</p>
+
+        <!-- Row 1 -->
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 40px; gap: 40px;">
+            <div class="card" style="flex: 1; max-width: 300px;">
+                <img src="bernardo-placeholder.png" alt="Bernardo Barros" />
+                <h3>Bernardo Barros</h3>
+                <p>Responsável pelos componentes eletrónicos e sistemas de visão: leitor de códigos de barras, sensor de carga, câmara, ecrã e o processador principal (Raspberry Pi 4).</p>
+            </div>
+            <div class="card" style="flex: 1; max-width: 300px;">
+                <img src="ze-placeholder.png" alt="José Lopes" />
+                <h3>José Magueijo Lopes</h3>
+                <p>Responsável pela bateria, motores, drivers e sensor de força, assegurando o fornecimento e controlo da energia e movimento do carrinho.</p>
+            </div>
+        </div>
+
+        <!-- Center logo -->
+        <div style="text-align: center; margin: 40px 0;">
+            <img src="images/logo/logo1.png" alt="Logo Smart Cart Express" style="height: 80px;" />
+        </div>
+
+        <!-- Row 2 -->
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px;">
+            <div class="card" style="flex: 1; max-width: 300px;">
+                <img src="david-placeholder.png" alt="David Freitas" />
+                <h3>David Freitas</h3>
+                <p>Responsável pela modelação 3D e desenvolvimento CAD do projeto, incluindo a montagem detalhada de todos os componentes.</p>
+            </div>
+            <div class="card" style="flex: 1; max-width: 300px;">
+                <img src="sergio-placeholder.png" alt="Sérgio Limões" />
+                <h3>Sérgio Limões</h3>
+                <p>Responsável pela seleção e análise dos materiais utilizados na construção do carrinho, garantindo durabilidade e eficiência.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>Projeto desenvolvido na <strong>Universidade de Aveiro</strong> – Departamento de Engenharia Mecânica (DEM)</p>
+        <p>Campus Universitário de Santiago, 3810-193 Aveiro, Portugal</p>
+        <p>Contacto: dem@ua.pt | Tel: +351 234 370 000</p>
+        <img src="images/logos/ualogo" alt="" />
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
