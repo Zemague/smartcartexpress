@@ -32,20 +32,40 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            flex-wrap: wrap;
         }
 
-            nav .logo {
-                display: flex;
-                align-items: center;
-                font-weight: 700;
-                font-size: 1.5em;
-                cursor: default;
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+            .menu-toggle span {
+                height: 3px;
+                width: 25px;
+                background: var(--white);
+                margin: 4px 0;
+                transition: all 0.3s ease;
             }
 
-                nav .logo img {
-                    height: 40px;
-                    margin-right: 10px;
-                }
+        nav .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5em;
+            cursor: default;
+        }
+
+            nav .logo img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+        nav .links {
+            display: flex;
+            align-items: center;
+        }
 
             nav .links a {
                 margin-left: 30px;
@@ -121,7 +141,6 @@
             justify-content: flex-start;
         }
 
-
             .card:hover {
                 transform: translateY(-6px);
                 box-shadow: 0 14px 30px rgba(0,0,0,0.12);
@@ -135,27 +154,24 @@
                 max-height: 200px;
             }
 
-            /* Specific fix for CAD tab images */
-            #cad .card img {
-                height: 200px;
-                object-fit: contain;
-            }
+        #cad .card img {
+            height: 200px;
+            object-fit: contain;
+        }
 
-            #components img[alt*="Leitor de códigos Zebra DS2208"],
-            #components img[alt*="Motores 24V"],
-            #components img[alt*="Sensor de força FlexiForce A201-25"] {
-                height: 200px;
-                object-fit: contain;
-            }
+        #components img[alt*="Leitor de códigos Zebra DS2208"],
+        #components img[alt*="Motores 24V"],
+        #components img[alt*="Sensor de força FlexiForce A201-25"] {
+            height: 200px;
+            object-fit: contain;
+        }
 
-
-
-            .card h3 {
-                margin: 0 0 10px 0;
-                color: var(--black);
-                font-weight: 700;
-                font-size: 1.3em;
-            }
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: var(--black);
+            font-weight: 700;
+            font-size: 1.3em;
+        }
 
         footer {
             background: var(--black);
@@ -174,20 +190,35 @@
             }
 
         @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
+            .menu-toggle {
+                display: flex;
             }
 
-                nav .links {
-                    margin-top: 10px;
-                }
+            nav .links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 10px;
+            }
 
-                    nav .links a {
-                        margin-left: 0;
-                        margin-right: 20px;
-                        font-size: 0.95em;
-                    }
+            nav.active .links {
+                display: flex;
+            }
+
+            nav .links a {
+                margin: 0;
+                padding: 10px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                font-size: 1em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
 
             .tab-content {
                 padding: 40px 20px;
@@ -195,6 +226,26 @@
 
             .hero {
                 padding: 60px 20px 30px;
+            }
+
+            .grid {
+                gap: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+                .card img {
+                    max-height: 160px;
+                }
+
+            p {
+                font-size: 1em;
+            }
+
+            footer {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -205,6 +256,11 @@
         <div class="logo">
             <img src="images/logo/logo1.png" alt="Logo Smart Cart Express" />
             Smart Cart Express
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <div class="links">
             <a href="#" onclick="showTab('home')">Home</a>
@@ -328,12 +384,10 @@
         <!-- Row 1 -->
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 40px; gap: 40px;">
             <div class="card" style="flex: 1; max-width: 300px;">
-                <img src="bernardo-placeholder.png" alt="Bernardo Barros" />
                 <h3>Bernardo Barros</h3>
                 <p>Responsável pelos componentes eletrónicos e sistemas de visão: leitor de códigos de barras, sensor de carga, câmara, ecrã e o processador principal (Raspberry Pi 4).</p>
             </div>
             <div class="card" style="flex: 1; max-width: 300px;">
-                <img src="ze-placeholder.png" alt="José Lopes" />
                 <h3>José Magueijo Lopes</h3>
                 <p>Responsável pela bateria, motores, drivers e sensor de força, assegurando o fornecimento e controlo da energia e movimento do carrinho.</p>
             </div>
@@ -347,19 +401,17 @@
         <!-- Row 2 -->
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px;">
             <div class="card" style="flex: 1; max-width: 300px;">
-                <img src="david-placeholder.png" alt="David Freitas" />
                 <h3>David Freitas</h3>
                 <p>Responsável pela modelação 3D e desenvolvimento CAD do projeto, incluindo a montagem detalhada de todos os componentes.</p>
             </div>
             <div class="card" style="flex: 1; max-width: 300px;">
-                <img src="sergio-placeholder.png" alt="Sérgio Limões" />
                 <h3>Sérgio Limões</h3>
                 <p>Responsável pela seleção e análise dos materiais utilizados na construção do carrinho, garantindo durabilidade e eficiência.</p>
             </div>
         </div>
     </div>
 
-
+    <!-- Footer -->
     <footer>
         <p>Projeto desenvolvido na <strong>Universidade de Aveiro</strong> – Departamento de Engenharia Mecânica (DEM)</p>
         <p>Campus Universitário de Santiago, 3810-193 Aveiro, Portugal</p>
@@ -367,14 +419,19 @@
         <img src="images/logos/ualogo" alt="" />
     </footer>
 
+    <!-- JavaScript -->
     <script>
         function showTab(tabId) {
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             window.scrollTo(0, 0);
+            document.querySelector('nav').classList.remove('active');
+        }
+
+        function toggleMenu() {
+            document.querySelector('nav').classList.toggle('active');
         }
     </script>
-
 </body>
 </html>
