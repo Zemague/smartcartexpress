@@ -166,30 +166,35 @@
             object-fit: contain;
         }
 
-        #team .row {
+        /* Desktop: team cards in two rows side-by-side */
+        .team-cards {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            justify-content: space-around;
             gap: 40px;
-            flex-wrap: wrap; /* keep wrapping on larger screens */
         }
 
-        #team .col {
-            flex: 1 1 45%;
-            max-width: 45%;
-            margin-bottom: 40px;
-        }
-
-        /* Mobile: stack vertically */
-        @media (max-width: 600px) {
-            #team .row {
-                flex-direction: column;
-                gap: 30px;
+            .team-cards .card {
+                flex: 1 1 45%;
+                max-width: 45%;
             }
 
-            #team .col {
-                max-width: 100%;
-                flex: none;
-                margin-bottom: 30px;
+        /* Mobile: stack vertically and hide logo */
+        @media (max-width: 600px) {
+            /* Stack cards vertically */
+            .team-cards {
+                display: block;
+            }
+
+                .team-cards .card {
+                    max-width: 100%;
+                    margin-bottom: 30px;
+                    flex: none;
+                }
+
+            /* Hide the center logo */
+            #team > div[style*="text-align: center"] {
+                display: none !important;
             }
         }
 
@@ -409,35 +414,26 @@
         <h1>Equipa Técnica</h1>
         <p>Somos quatro estudantes da Universidade de Aveiro, Departamento de Engenharia Mecânica (DEM), que desenvolveram o projeto Smart Cart Express com dedicação e paixão pela inovação.</p>
 
-        <!-- Row 1 -->
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 40px; gap: 40px;">
-            <div class="card" style="flex: 1; max-width: 300px;">
+        <div class="team-cards">
+            <div class="card">
                 <h3>Bernardo Barros</h3>
                 <p>Responsável pelos componentes eletrónicos e sistemas de visão: leitor de códigos de barras, sensor de carga, câmara, ecrã e o processador principal (Raspberry Pi 4).</p>
             </div>
-            <div class="card" style="flex: 1; max-width: 300px;">
+            <div class="card">
                 <h3>José Magueijo Lopes</h3>
                 <p>Responsável pela bateria, motores, drivers e sensor de força, assegurando o fornecimento e controlo da energia e movimento do carrinho.</p>
             </div>
-        </div>
-
-        <!-- Center logo -->
-        <div style="text-align: center; margin: 40px 0;">
-            <img src="images/logo/logo1.png" alt="Logo Smart Cart Express" style="height: 80px;" />
-        </div>
-
-        <!-- Row 2 -->
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px;">
-            <div class="card" style="flex: 1; max-width: 300px;">
+            <div class="card">
                 <h3>David Freitas</h3>
                 <p>Responsável pela modelação 3D e desenvolvimento CAD do projeto, incluindo a montagem detalhada de todos os componentes.</p>
             </div>
-            <div class="card" style="flex: 1; max-width: 300px;">
+            <div class="card">
                 <h3>Sérgio Limões</h3>
                 <p>Responsável pela seleção e análise dos materiais utilizados na construção do carrinho, garantindo durabilidade e eficiência.</p>
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer>
