@@ -166,6 +166,34 @@
             object-fit: contain;
         }
 
+        #team .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap; /* keep wrapping on larger screens */
+        }
+
+        #team .col {
+            flex: 1 1 45%;
+            max-width: 45%;
+            margin-bottom: 40px;
+        }
+
+        /* Mobile: stack vertically */
+        @media (max-width: 600px) {
+            #team .row {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            #team .col {
+                max-width: 100%;
+                flex: none;
+                margin-bottom: 30px;
+            }
+        }
+
+
         .card h3 {
             margin: 0 0 10px 0;
             color: var(--black);
